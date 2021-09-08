@@ -180,7 +180,8 @@ typedef struct _GLFWlibraryGLX
 
 GLFWbool _glfwInitGLX(void);
 void _glfwTerminateGLX(void);
-GLFWbool _glfwCreateContextGLX(_GLFWwindow* window,
+GLFWbool _glfwCreateContextGLX(const _GLFWwndconfig* wndconfig,
+                               _GLFWwindow* window,
                                const _GLFWctxconfig* ctxconfig,
                                const _GLFWfbconfig* fbconfig);
 void _glfwDestroyContextGLX(_GLFWwindow* window);

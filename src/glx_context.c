@@ -610,7 +610,8 @@ GLFWbool _glfwCreateContextForFBGLX(_GLFWwindow* window,
 
 // Create the OpenGL or OpenGL ES context
 //
-GLFWbool _glfwCreateContextGLX(_GLFWwindow* window,
+GLFWbool _glfwCreateContextGLX(const _GLFWwndconfig* wndconfig,
+                               _GLFWwindow* window,
                                const _GLFWctxconfig* ctxconfig,
                                const _GLFWfbconfig* fbconfig)
 {
@@ -627,8 +628,11 @@ GLFWbool _glfwCreateContextGLX(_GLFWwindow* window,
         return GLFW_FALSE;
     }
 
-    window->context.glx.window =
-        glXCreateWindow(_glfw.x11.display, window->context.glx.fbconfig, window->x11.handle, NULL);
+    if (wndconfig->nativeParent == NULL)
+        window->context.glx.window = glXCreateWindow(_glfw.x11.display, window->context.glx.fbconfig, window->x11.handle, NULL);
+    else
+        window->context.glx.window = window->x11.parent;
+
     if (!window->context.glx.window)
     {
         _glfwInputError(GLFW_PLATFORM_ERROR, "GLX: Failed to create window");

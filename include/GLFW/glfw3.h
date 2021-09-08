@@ -877,6 +877,12 @@ extern "C" {
  *  Cursor centering [window hint](@ref GLFW_CENTER_CURSOR_hint).
  */
 #define GLFW_CENTER_CURSOR          0x00020009
+
+/*! @brief Parent native window pointer hint
+ *
+ *  Parent window for embedding [window hint](@ref GLFW_NATIVE_PARENT_hint).
+ */
+#define GLFW_NATIVE_PARENT_HANDLE   0x0002000A
 /*! @brief Window framebuffer transparency hint and attribute
  *
  *  Window framebuffer transparency
@@ -2822,6 +2828,29 @@ GLFWAPI void glfwDefaultWindowHints(void);
  *  @ingroup window
  */
 GLFWAPI void glfwWindowHint(int hint, int value);
+
+/*! @brief Sets the specified window hint to the desired pointer value.
+ *
+ *  This function works in the same way as @ref glfwWindowHint, but sets pointer
+ *  values rather than integers.  Calling this function for hints that do not
+ *  expect a pointer value is an error.
+ *
+ *  @param[in] hint The pointer [window hint](@ref window_hints) to set.
+ *  @param[in] value The pointer value of the window hint.
+ *
+ *  @errors Possible errors include @ref GLFW_NOT_INITIALIZED and @ref
+ *  GLFW_INVALID_ENUM.
+ *
+ *  @thread_safety This function must only be called from the main thread.
+ *
+ *  @sa @ref window_hints
+ *  @sa @ref glfwDefaultWindowHints
+ *
+ *  @since Added in version 3.3.
+ *
+ *  @ingroup window
+ */
+GLFWAPI void glfwWindowHintPointer(int hint, void* value);
 
 /*! @brief Sets the specified window hint to the desired value.
  *

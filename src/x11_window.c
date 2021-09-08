@@ -628,9 +628,11 @@ static GLFWbool createNativeWindow(_GLFWwindow* window,
 
     _glfwGrabErrorHandlerX11();
 
-    window->x11.parent = _glfw.x11.root;
+    window->x11.parent = (wndconfig->nativeParent
+                          ? (Window)wndconfig->nativeParent
+                          : _glfw.x11.root);
     window->x11.handle = XCreateWindow(_glfw.x11.display,
-                                       _glfw.x11.root,
+                                       window->x11.parent,
                                        0, 0,   // Position
                                        width, height,
                                        0,      // Border width
@@ -649,137 +651,141 @@ static GLFWbool createNativeWindow(_GLFWwindow* window,
         return GLFW_FALSE;
     }
 
-    XSaveContext(_glfw.x11.display,
-                 window->x11.handle,
-                 _glfw.x11.context,
-                 (XPointer) window);
-
-    if (!wndconfig->decorated)
-        _glfwPlatformSetWindowDecorated(window, GLFW_FALSE);
-
-    if (_glfw.x11.NET_WM_STATE && !window->monitor)
+    if (wndconfig->nativeParent == NULL)
     {
-        Atom states[3];
-        int count = 0;
+        XSaveContext(_glfw.x11.display,
+                     window->x11.handle,
+                     _glfw.x11.context,
+                     (XPointer) window);
 
-        if (wndconfig->floating)
-        {
-            if (_glfw.x11.NET_WM_STATE_ABOVE)
-                states[count++] = _glfw.x11.NET_WM_STATE_ABOVE;
-        }
+        if (!wndconfig->decorated)
+            _glfwPlatformSetWindowDecorated(window, GLFW_FALSE);
 
-        if (wndconfig->maximized)
+        if (_glfw.x11.NET_WM_STATE && !window->monitor)
         {
-            if (_glfw.x11.NET_WM_STATE_MAXIMIZED_VERT &&
-                _glfw.x11.NET_WM_STATE_MAXIMIZED_HORZ)
+            Atom states[3];
+            int count = 0;
+
+            if (wndconfig->floating)
             {
-                states[count++] = _glfw.x11.NET_WM_STATE_MAXIMIZED_VERT;
-                states[count++] = _glfw.x11.NET_WM_STATE_MAXIMIZED_HORZ;
-                window->x11.maximized = GLFW_TRUE;
+                if (_glfw.x11.NET_WM_STATE_ABOVE)
+                    states[count++] = _glfw.x11.NET_WM_STATE_ABOVE;
+            }
+
+            if (wndconfig->maximized)
+            {
+                if (_glfw.x11.NET_WM_STATE_MAXIMIZED_VERT &&
+                    _glfw.x11.NET_WM_STATE_MAXIMIZED_HORZ)
+                {
+                    states[count++] = _glfw.x11.NET_WM_STATE_MAXIMIZED_VERT;
+                    states[count++] = _glfw.x11.NET_WM_STATE_MAXIMIZED_HORZ;
+                    window->x11.maximized = GLFW_TRUE;
+                }
+            }
+
+            if (count)
+            {
+                XChangeProperty(_glfw.x11.display, window->x11.handle,
+                                _glfw.x11.NET_WM_STATE, XA_ATOM, 32,
+                                PropModeReplace, (unsigned char*) states, count);
             }
         }
 
-        if (count)
+        // Declare the WM protocols supported by GLFW
         {
+            Atom protocols[] =
+                    {
+                            _glfw.x11.WM_DELETE_WINDOW,
+                            _glfw.x11.NET_WM_PING
+                    };
+
+            XSetWMProtocols(_glfw.x11.display, window->x11.handle,
+                            protocols, sizeof(protocols) / sizeof(Atom));
+        }
+
+        // Declare our PID
+        {
+            const long pid = getpid();
+
+            XChangeProperty(_glfw.x11.display,  window->x11.handle,
+                            _glfw.x11.NET_WM_PID, XA_CARDINAL, 32,
+                            PropModeReplace,
+                            (unsigned char*) &pid, 1);
+        }
+
+        if (_glfw.x11.NET_WM_WINDOW_TYPE && _glfw.x11.NET_WM_WINDOW_TYPE_NORMAL)
+        {
+            Atom type = _glfw.x11.NET_WM_WINDOW_TYPE_NORMAL;
+            XChangeProperty(_glfw.x11.display,  window->x11.handle,
+                            _glfw.x11.NET_WM_WINDOW_TYPE, XA_ATOM, 32,
+                            PropModeReplace, (unsigned char*) &type, 1);
+        }
+
+        // Set ICCCM WM_HINTS property
+        {
+            XWMHints* hints = XAllocWMHints();
+            if (!hints)
+            {
+                _glfwInputError(GLFW_OUT_OF_MEMORY,
+                                "X11: Failed to allocate WM hints");
+                return GLFW_FALSE;
+            }
+
+            hints->flags = StateHint;
+            hints->initial_state = NormalState;
+
+            XSetWMHints(_glfw.x11.display, window->x11.handle, hints);
+            XFree(hints);
+        }
+
+        updateNormalHints(window, width, height);
+
+        // Set ICCCM WM_CLASS property
+        {
+            XClassHint* hint = XAllocClassHint();
+
+            if (strlen(wndconfig->x11.instanceName) &&
+                strlen(wndconfig->x11.className))
+            {
+                hint->res_name = (char*) wndconfig->x11.instanceName;
+                hint->res_class = (char*) wndconfig->x11.className;
+            }
+            else
+            {
+                const char* resourceName = getenv("RESOURCE_NAME");
+                if (resourceName && strlen(resourceName))
+                    hint->res_name = (char*) resourceName;
+                else if (strlen(wndconfig->title))
+                    hint->res_name = (char*) wndconfig->title;
+                else
+                    hint->res_name = (char*) "glfw-application";
+
+                if (strlen(wndconfig->title))
+                    hint->res_class = (char*) wndconfig->title;
+                else
+                    hint->res_class = (char*) "GLFW-Application";
+            }
+
+            XSetClassHint(_glfw.x11.display, window->x11.handle, hint);
+            XFree(hint);
+        }
+
+        // Announce support for Xdnd (drag and drop)
+        {
+            const Atom version = _GLFW_XDND_VERSION;
             XChangeProperty(_glfw.x11.display, window->x11.handle,
-                            _glfw.x11.NET_WM_STATE, XA_ATOM, 32,
-                            PropModeReplace, (unsigned char*) states, count);
-        }
-    }
-
-    // Declare the WM protocols supported by GLFW
-    {
-        Atom protocols[] =
-        {
-            _glfw.x11.WM_DELETE_WINDOW,
-            _glfw.x11.NET_WM_PING
-        };
-
-        XSetWMProtocols(_glfw.x11.display, window->x11.handle,
-                        protocols, sizeof(protocols) / sizeof(Atom));
-    }
-
-    // Declare our PID
-    {
-        const long pid = getpid();
-
-        XChangeProperty(_glfw.x11.display,  window->x11.handle,
-                        _glfw.x11.NET_WM_PID, XA_CARDINAL, 32,
-                        PropModeReplace,
-                        (unsigned char*) &pid, 1);
-    }
-
-    if (_glfw.x11.NET_WM_WINDOW_TYPE && _glfw.x11.NET_WM_WINDOW_TYPE_NORMAL)
-    {
-        Atom type = _glfw.x11.NET_WM_WINDOW_TYPE_NORMAL;
-        XChangeProperty(_glfw.x11.display,  window->x11.handle,
-                        _glfw.x11.NET_WM_WINDOW_TYPE, XA_ATOM, 32,
-                        PropModeReplace, (unsigned char*) &type, 1);
-    }
-
-    // Set ICCCM WM_HINTS property
-    {
-        XWMHints* hints = XAllocWMHints();
-        if (!hints)
-        {
-            _glfwInputError(GLFW_OUT_OF_MEMORY,
-                            "X11: Failed to allocate WM hints");
-            return GLFW_FALSE;
+                            _glfw.x11.XdndAware, XA_ATOM, 32,
+                            PropModeReplace, (unsigned char*) &version, 1);
         }
 
-        hints->flags = StateHint;
-        hints->initial_state = NormalState;
 
-        XSetWMHints(_glfw.x11.display, window->x11.handle, hints);
-        XFree(hints);
-    }
-
-    updateNormalHints(window, width, height);
-
-    // Set ICCCM WM_CLASS property
-    {
-        XClassHint* hint = XAllocClassHint();
-
-        if (strlen(wndconfig->x11.instanceName) &&
-            strlen(wndconfig->x11.className))
-        {
-            hint->res_name = (char*) wndconfig->x11.instanceName;
-            hint->res_class = (char*) wndconfig->x11.className;
-        }
-        else
-        {
-            const char* resourceName = getenv("RESOURCE_NAME");
-            if (resourceName && strlen(resourceName))
-                hint->res_name = (char*) resourceName;
-            else if (strlen(wndconfig->title))
-                hint->res_name = (char*) wndconfig->title;
-            else
-                hint->res_name = (char*) "glfw-application";
-
-            if (strlen(wndconfig->title))
-                hint->res_class = (char*) wndconfig->title;
-            else
-                hint->res_class = (char*) "GLFW-Application";
-        }
-
-        XSetClassHint(_glfw.x11.display, window->x11.handle, hint);
-        XFree(hint);
-    }
-
-    // Announce support for Xdnd (drag and drop)
-    {
-        const Atom version = _GLFW_XDND_VERSION;
-        XChangeProperty(_glfw.x11.display, window->x11.handle,
-                        _glfw.x11.XdndAware, XA_ATOM, 32,
-                        PropModeReplace, (unsigned char*) &version, 1);
+        _glfwPlatformSetWindowTitle(window, wndconfig->title);
+        _glfwPlatformGetWindowPos(window, &window->x11.xpos, &window->x11.ypos);
+        _glfwPlatformGetWindowSize(window, &window->x11.width, &window->x11.height);
     }
 
     if (_glfw.x11.im)
         _glfwCreateInputContextX11(window);
-
-    _glfwPlatformSetWindowTitle(window, wndconfig->title);
-    _glfwPlatformGetWindowPos(window, &window->x11.xpos, &window->x11.ypos);
-    _glfwPlatformGetWindowSize(window, &window->x11.width, &window->x11.height);
 
     return GLFW_TRUE;
 }
@@ -2014,7 +2020,7 @@ int _glfwPlatformCreateWindow(_GLFWwindow* window,
     {
         if (ctxconfig->source == GLFW_NATIVE_CONTEXT_API)
         {
-            if (!_glfwCreateContextGLX(window, ctxconfig, fbconfig))
+            if (!_glfwCreateContextGLX(wndconfig, window, ctxconfig, fbconfig))
                 return GLFW_FALSE;
         }
         else if (ctxconfig->source == GLFW_EGL_CONTEXT_API)
