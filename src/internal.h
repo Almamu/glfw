@@ -28,63 +28,63 @@
 #pragma once
 
 #if defined(_GLFW_USE_CONFIG_H)
- #include "glfw_config.h"
+#include "glfw_config.h"
 #endif
 
 #if defined(GLFW_INCLUDE_GLCOREARB) || \
-    defined(GLFW_INCLUDE_ES1)       || \
-    defined(GLFW_INCLUDE_ES2)       || \
-    defined(GLFW_INCLUDE_ES3)       || \
-    defined(GLFW_INCLUDE_ES31)      || \
-    defined(GLFW_INCLUDE_ES32)      || \
-    defined(GLFW_INCLUDE_NONE)      || \
-    defined(GLFW_INCLUDE_GLEXT)     || \
-    defined(GLFW_INCLUDE_GLU)       || \
-    defined(GLFW_INCLUDE_VULKAN)    || \
+    defined(GLFW_INCLUDE_ES1) ||       \
+    defined(GLFW_INCLUDE_ES2) ||       \
+    defined(GLFW_INCLUDE_ES3) ||       \
+    defined(GLFW_INCLUDE_ES31) ||      \
+    defined(GLFW_INCLUDE_ES32) ||      \
+    defined(GLFW_INCLUDE_NONE) ||      \
+    defined(GLFW_INCLUDE_GLEXT) ||     \
+    defined(GLFW_INCLUDE_GLU) ||       \
+    defined(GLFW_INCLUDE_VULKAN) ||    \
     defined(GLFW_DLL)
- #error "You must not define any header option macros when compiling GLFW"
+#error "You must not define any header option macros when compiling GLFW"
 #endif
 
 #define GLFW_INCLUDE_NONE
 #include "../include/GLFW/glfw3.h"
 
-#define _GLFW_INSERT_FIRST      0
-#define _GLFW_INSERT_LAST       1
+#define _GLFW_INSERT_FIRST 0
+#define _GLFW_INSERT_LAST 1
 
-#define _GLFW_POLL_PRESENCE     0
-#define _GLFW_POLL_AXES         1
-#define _GLFW_POLL_BUTTONS      2
-#define _GLFW_POLL_ALL          (_GLFW_POLL_AXES | _GLFW_POLL_BUTTONS)
+#define _GLFW_POLL_PRESENCE 0
+#define _GLFW_POLL_AXES 1
+#define _GLFW_POLL_BUTTONS 2
+#define _GLFW_POLL_ALL (_GLFW_POLL_AXES | _GLFW_POLL_BUTTONS)
 
-#define _GLFW_MESSAGE_SIZE      1024
+#define _GLFW_MESSAGE_SIZE 1024
 
 typedef int GLFWbool;
 
-typedef struct _GLFWerror       _GLFWerror;
-typedef struct _GLFWinitconfig  _GLFWinitconfig;
-typedef struct _GLFWwndconfig   _GLFWwndconfig;
-typedef struct _GLFWctxconfig   _GLFWctxconfig;
-typedef struct _GLFWfbconfig    _GLFWfbconfig;
-typedef struct _GLFWcontext     _GLFWcontext;
-typedef struct _GLFWwindow      _GLFWwindow;
-typedef struct _GLFWlibrary     _GLFWlibrary;
-typedef struct _GLFWmonitor     _GLFWmonitor;
-typedef struct _GLFWcursor      _GLFWcursor;
-typedef struct _GLFWmapelement  _GLFWmapelement;
-typedef struct _GLFWmapping     _GLFWmapping;
-typedef struct _GLFWjoystick    _GLFWjoystick;
-typedef struct _GLFWtls         _GLFWtls;
-typedef struct _GLFWmutex       _GLFWmutex;
+typedef struct _GLFWerror _GLFWerror;
+typedef struct _GLFWinitconfig _GLFWinitconfig;
+typedef struct _GLFWwndconfig _GLFWwndconfig;
+typedef struct _GLFWctxconfig _GLFWctxconfig;
+typedef struct _GLFWfbconfig _GLFWfbconfig;
+typedef struct _GLFWcontext _GLFWcontext;
+typedef struct _GLFWwindow _GLFWwindow;
+typedef struct _GLFWlibrary _GLFWlibrary;
+typedef struct _GLFWmonitor _GLFWmonitor;
+typedef struct _GLFWcursor _GLFWcursor;
+typedef struct _GLFWmapelement _GLFWmapelement;
+typedef struct _GLFWmapping _GLFWmapping;
+typedef struct _GLFWjoystick _GLFWjoystick;
+typedef struct _GLFWtls _GLFWtls;
+typedef struct _GLFWmutex _GLFWmutex;
 typedef struct _GLFWusercontext _GLFWusercontext;
 
-typedef void (* _GLFWmakecontextcurrentfun)(_GLFWwindow*);
-typedef void (* _GLFWswapbuffersfun)(_GLFWwindow*);
-typedef void (* _GLFWswapintervalfun)(int);
-typedef int (* _GLFWextensionsupportedfun)(const char*);
-typedef GLFWglproc (* _GLFWgetprocaddressfun)(const char*);
-typedef void (* _GLFWdestroycontextfun)(_GLFWwindow*);
-typedef void (* _GLFWmakeusercontextcurrentfun)(_GLFWusercontext* context);
-typedef void (* _GLFWdestroyusercontextfun)(_GLFWusercontext* context);
+typedef void (*_GLFWmakecontextcurrentfun)(_GLFWwindow *);
+typedef void (*_GLFWswapbuffersfun)(_GLFWwindow *);
+typedef void (*_GLFWswapintervalfun)(int);
+typedef int (*_GLFWextensionsupportedfun)(const char *);
+typedef GLFWglproc (*_GLFWgetprocaddressfun)(const char *);
+typedef void (*_GLFWdestroycontextfun)(_GLFWwindow *);
+typedef void (*_GLFWmakeusercontextcurrentfun)(_GLFWusercontext *context);
+typedef void (*_GLFWdestroyusercontextfun)(_GLFWusercontext *context);
 
 #define GL_VERSION 0x1f02
 #define GL_NONE 0
@@ -111,15 +111,15 @@ typedef unsigned int GLenum;
 typedef unsigned int GLbitfield;
 typedef unsigned char GLubyte;
 
-typedef void (APIENTRY * PFNGLCLEARPROC)(GLbitfield);
-typedef const GLubyte* (APIENTRY * PFNGLGETSTRINGPROC)(GLenum);
-typedef void (APIENTRY * PFNGLGETINTEGERVPROC)(GLenum,GLint*);
-typedef const GLubyte* (APIENTRY * PFNGLGETSTRINGIPROC)(GLenum,GLuint);
+typedef void(APIENTRY *PFNGLCLEARPROC)(GLbitfield);
+typedef const GLubyte *(APIENTRY *PFNGLGETSTRINGPROC)(GLenum);
+typedef void(APIENTRY *PFNGLGETINTEGERVPROC)(GLenum, GLint *);
+typedef const GLubyte *(APIENTRY *PFNGLGETSTRINGIPROC)(GLenum, GLuint);
 
 #define VK_NULL_HANDLE 0
 
-typedef void* VkInstance;
-typedef void* VkPhysicalDevice;
+typedef void *VkInstance;
+typedef void *VkPhysicalDevice;
 typedef uint64_t VkSurfaceKHR;
 typedef uint32_t VkFlags;
 typedef uint32_t VkBool32;
@@ -167,34 +167,34 @@ typedef struct VkAllocationCallbacks VkAllocationCallbacks;
 
 typedef struct VkExtensionProperties
 {
-    char            extensionName[256];
-    uint32_t        specVersion;
+    char extensionName[256];
+    uint32_t specVersion;
 } VkExtensionProperties;
 
-typedef void (APIENTRY * PFN_vkVoidFunction)(void);
+typedef void(APIENTRY *PFN_vkVoidFunction)(void);
 
 #if defined(_GLFW_VULKAN_STATIC)
-  PFN_vkVoidFunction vkGetInstanceProcAddr(VkInstance,const char*);
-  VkResult vkEnumerateInstanceExtensionProperties(const char*,uint32_t*,VkExtensionProperties*);
+PFN_vkVoidFunction vkGetInstanceProcAddr(VkInstance, const char *);
+VkResult vkEnumerateInstanceExtensionProperties(const char *, uint32_t *, VkExtensionProperties *);
 #else
-  typedef PFN_vkVoidFunction (APIENTRY * PFN_vkGetInstanceProcAddr)(VkInstance,const char*);
-  typedef VkResult (APIENTRY * PFN_vkEnumerateInstanceExtensionProperties)(const char*,uint32_t*,VkExtensionProperties*);
-  #define vkEnumerateInstanceExtensionProperties _glfw.vk.EnumerateInstanceExtensionProperties
-  #define vkGetInstanceProcAddr _glfw.vk.GetInstanceProcAddr
+typedef PFN_vkVoidFunction(APIENTRY *PFN_vkGetInstanceProcAddr)(VkInstance, const char *);
+typedef VkResult(APIENTRY *PFN_vkEnumerateInstanceExtensionProperties)(const char *, uint32_t *, VkExtensionProperties *);
+#define vkEnumerateInstanceExtensionProperties _glfw.vk.EnumerateInstanceExtensionProperties
+#define vkGetInstanceProcAddr _glfw.vk.GetInstanceProcAddr
 #endif
 
 #if defined(_GLFW_COCOA)
- #include "cocoa_platform.h"
+#include "cocoa_platform.h"
 #elif defined(_GLFW_WIN32)
- #include "win32_platform.h"
+#include "win32_platform.h"
 #elif defined(_GLFW_X11)
- #include "x11_platform.h"
+#include "x11_platform.h"
 #elif defined(_GLFW_WAYLAND)
- #include "wl_platform.h"
+#include "wl_platform.h"
 #elif defined(_GLFW_OSMESA)
- #include "null_platform.h"
+#include "null_platform.h"
 #else
- #error "No supported window creation API selected"
+#error "No supported window creation API selected"
 #endif
 
 #include "egl_context.h"
@@ -224,7 +224,7 @@ typedef void (APIENTRY * PFN_vkVoidFunction)(void);
 // Swaps the provided pointers
 #define _GLFW_SWAP_POINTERS(x, y) \
     {                             \
-        void* t;                  \
+        void *t;                  \
         t = x;                    \
         x = y;                    \
         y = t;                    \
@@ -234,9 +234,9 @@ typedef void (APIENTRY * PFN_vkVoidFunction)(void);
 //
 struct _GLFWerror
 {
-    _GLFWerror*     next;
-    int             code;
-    char            description[_GLFW_MESSAGE_SIZE];
+    _GLFWerror *next;
+    int code;
+    char description[_GLFW_MESSAGE_SIZE];
 };
 
 // Initialization configuration
@@ -245,14 +245,16 @@ struct _GLFWerror
 //
 struct _GLFWinitconfig
 {
-    GLFWbool      hatButtons;
-    int           angleType;
-    struct {
-        GLFWbool  menubar;
-        GLFWbool  chdir;
+    GLFWbool hatButtons;
+    int angleType;
+    struct
+    {
+        GLFWbool menubar;
+        GLFWbool chdir;
     } ns;
-    struct {
-        GLFWbool  xcbVulkanSurface;
+    struct
+    {
+        GLFWbool xcbVulkanSurface;
     } x11;
 };
 
@@ -264,31 +266,39 @@ struct _GLFWinitconfig
 //
 struct _GLFWwndconfig
 {
-    int           width;
-    int           height;
-    const char*   title;
-    void*         nativeParent;
-    GLFWbool      resizable;
-    GLFWbool      visible;
-    GLFWbool      decorated;
-    GLFWbool      focused;
-    GLFWbool      autoIconify;
-    GLFWbool      floating;
-    GLFWbool      maximized;
-    GLFWbool      centerCursor;
-    GLFWbool      focusOnShow;
-    GLFWbool      mousePassthrough;
-    GLFWbool      scaleToMonitor;
-    struct {
-        GLFWbool  retina;
-        char      frameName[256];
+    int width;
+    int height;
+    const char *title;
+    void *nativeParent;
+    GLFWbool resizable;
+    GLFWbool visible;
+    GLFWbool decorated;
+    GLFWbool focused;
+    GLFWbool autoIconify;
+    GLFWbool floating;
+    GLFWbool maximized;
+    GLFWbool centerCursor;
+    GLFWbool focusOnShow;
+    GLFWbool mousePassthrough;
+    GLFWbool scaleToMonitor;
+    GLFWbool isDesktopWindow;
+    GLFWbool sticky;
+    GLFWbool below;
+    GLFWbool skipTaskbar;
+    GLFWbool skipPager;
+    struct
+    {
+        GLFWbool retina;
+        char frameName[256];
     } ns;
-    struct {
-        char      className[256];
-        char      instanceName[256];
+    struct
+    {
+        char className[256];
+        char instanceName[256];
     } x11;
-    struct {
-        GLFWbool  keymenu;
+    struct
+    {
+        GLFWbool keymenu;
     } win32;
 };
 
@@ -300,19 +310,20 @@ struct _GLFWwndconfig
 //
 struct _GLFWctxconfig
 {
-    int           client;
-    int           source;
-    int           major;
-    int           minor;
-    GLFWbool      forward;
-    GLFWbool      debug;
-    GLFWbool      noerror;
-    int           profile;
-    int           robustness;
-    int           release;
-    _GLFWwindow*  share;
-    struct {
-        GLFWbool  offline;
+    int client;
+    int source;
+    int major;
+    int minor;
+    GLFWbool forward;
+    GLFWbool debug;
+    GLFWbool noerror;
+    int profile;
+    int robustness;
+    int release;
+    _GLFWwindow *share;
+    struct
+    {
+        GLFWbool offline;
     } nsgl;
 };
 
@@ -326,47 +337,47 @@ struct _GLFWctxconfig
 //
 struct _GLFWfbconfig
 {
-    int         redBits;
-    int         greenBits;
-    int         blueBits;
-    int         alphaBits;
-    int         depthBits;
-    int         stencilBits;
-    int         accumRedBits;
-    int         accumGreenBits;
-    int         accumBlueBits;
-    int         accumAlphaBits;
-    int         auxBuffers;
-    GLFWbool    stereo;
-    int         samples;
-    GLFWbool    sRGB;
-    GLFWbool    doublebuffer;
-    GLFWbool    transparent;
-    uintptr_t   handle;
+    int redBits;
+    int greenBits;
+    int blueBits;
+    int alphaBits;
+    int depthBits;
+    int stencilBits;
+    int accumRedBits;
+    int accumGreenBits;
+    int accumBlueBits;
+    int accumAlphaBits;
+    int auxBuffers;
+    GLFWbool stereo;
+    int samples;
+    GLFWbool sRGB;
+    GLFWbool doublebuffer;
+    GLFWbool transparent;
+    uintptr_t handle;
 };
 
 // Context structure
 //
 struct _GLFWcontext
 {
-    int                 client;
-    int                 source;
-    int                 major, minor, revision;
-    GLFWbool            forward, debug, noerror;
-    int                 profile;
-    int                 robustness;
-    int                 release;
+    int client;
+    int source;
+    int major, minor, revision;
+    GLFWbool forward, debug, noerror;
+    int profile;
+    int robustness;
+    int release;
 
-    PFNGLGETSTRINGIPROC  GetStringi;
+    PFNGLGETSTRINGIPROC GetStringi;
     PFNGLGETINTEGERVPROC GetIntegerv;
-    PFNGLGETSTRINGPROC   GetString;
+    PFNGLGETSTRINGPROC GetString;
 
-    _GLFWmakecontextcurrentfun  makeCurrent;
-    _GLFWswapbuffersfun         swapBuffers;
-    _GLFWswapintervalfun        swapInterval;
-    _GLFWextensionsupportedfun  extensionSupported;
-    _GLFWgetprocaddressfun      getProcAddress;
-    _GLFWdestroycontextfun      destroy;
+    _GLFWmakecontextcurrentfun makeCurrent;
+    _GLFWswapbuffersfun swapBuffers;
+    _GLFWswapintervalfun swapInterval;
+    _GLFWextensionsupportedfun extensionSupported;
+    _GLFWgetprocaddressfun getProcAddress;
+    _GLFWdestroycontextfun destroy;
 
     // This is defined in the context API's context.h
     _GLFW_PLATFORM_CONTEXT_STATE;
@@ -376,12 +387,11 @@ struct _GLFWcontext
     _GLFWcontextOSMesa osmesa;
 };
 
-
 // User Context structure
 //
 struct _GLFWusercontext
 {
-    _GLFWwindow* window;
+    _GLFWwindow *window;
 
     // This is defined in the context API's context.h
     _GLFW_PLATFORM_USER_CONTEXT_STATE;
@@ -398,56 +408,57 @@ struct _GLFWusercontext
 //
 struct _GLFWwindow
 {
-    struct _GLFWwindow* next;
+    struct _GLFWwindow *next;
 
     // Window settings and state
-    GLFWbool            resizable;
-    GLFWbool            decorated;
-    GLFWbool            autoIconify;
-    GLFWbool            floating;
-    GLFWbool            focusOnShow;
-    GLFWbool            mousePassthrough;
-    GLFWbool            shouldClose;
-    void*               userPointer;
-    GLFWbool            doublebuffer;
-    GLFWvidmode         videoMode;
-    _GLFWmonitor*       monitor;
-    _GLFWcursor*        cursor;
+    GLFWbool resizable;
+    GLFWbool decorated;
+    GLFWbool autoIconify;
+    GLFWbool floating;
+    GLFWbool focusOnShow;
+    GLFWbool mousePassthrough;
+    GLFWbool shouldClose;
+    void *userPointer;
+    GLFWbool doublebuffer;
+    GLFWvidmode videoMode;
+    _GLFWmonitor *monitor;
+    _GLFWcursor *cursor;
 
-    int                 minwidth, minheight;
-    int                 maxwidth, maxheight;
-    int                 numer, denom;
+    int minwidth, minheight;
+    int maxwidth, maxheight;
+    int numer, denom;
 
-    GLFWbool            stickyKeys;
-    GLFWbool            stickyMouseButtons;
-    GLFWbool            lockKeyMods;
-    int                 cursorMode;
-    char                mouseButtons[GLFW_MOUSE_BUTTON_LAST + 1];
-    char                keys[GLFW_KEY_LAST + 1];
+    GLFWbool stickyKeys;
+    GLFWbool stickyMouseButtons;
+    GLFWbool lockKeyMods;
+    int cursorMode;
+    char mouseButtons[GLFW_MOUSE_BUTTON_LAST + 1];
+    char keys[GLFW_KEY_LAST + 1];
     // Virtual cursor position when cursor is disabled
-    double              virtualCursorPosX, virtualCursorPosY;
-    GLFWbool            rawMouseMotion;
+    double virtualCursorPosX, virtualCursorPosY;
+    GLFWbool rawMouseMotion;
 
-    _GLFWcontext        context;
+    _GLFWcontext context;
 
-    struct {
-        GLFWwindowposfun          pos;
-        GLFWwindowsizefun         size;
-        GLFWwindowclosefun        close;
-        GLFWwindowrefreshfun      refresh;
-        GLFWwindowfocusfun        focus;
-        GLFWwindowiconifyfun      iconify;
-        GLFWwindowmaximizefun     maximize;
-        GLFWframebuffersizefun    fbsize;
+    struct
+    {
+        GLFWwindowposfun pos;
+        GLFWwindowsizefun size;
+        GLFWwindowclosefun close;
+        GLFWwindowrefreshfun refresh;
+        GLFWwindowfocusfun focus;
+        GLFWwindowiconifyfun iconify;
+        GLFWwindowmaximizefun maximize;
+        GLFWframebuffersizefun fbsize;
         GLFWwindowcontentscalefun scale;
-        GLFWmousebuttonfun        mouseButton;
-        GLFWcursorposfun          cursorPos;
-        GLFWcursorenterfun        cursorEnter;
-        GLFWscrollfun             scroll;
-        GLFWkeyfun                key;
-        GLFWcharfun               character;
-        GLFWcharmodsfun           charmods;
-        GLFWdropfun               drop;
+        GLFWmousebuttonfun mouseButton;
+        GLFWcursorposfun cursorPos;
+        GLFWcursorenterfun cursorEnter;
+        GLFWscrollfun scroll;
+        GLFWkeyfun key;
+        GLFWcharfun character;
+        GLFWcharmodsfun charmods;
+        GLFWdropfun drop;
     } callbacks;
 
     // This is defined in the window API's platform.h
@@ -458,21 +469,21 @@ struct _GLFWwindow
 //
 struct _GLFWmonitor
 {
-    char            name[128];
-    void*           userPointer;
+    char name[128];
+    void *userPointer;
 
     // Physical dimensions in millimeters.
-    int             widthMM, heightMM;
+    int widthMM, heightMM;
 
     // The window whose video mode is current on this monitor
-    _GLFWwindow*    window;
+    _GLFWwindow *window;
 
-    GLFWvidmode*    modes;
-    int             modeCount;
-    GLFWvidmode     currentMode;
+    GLFWvidmode *modes;
+    int modeCount;
+    GLFWvidmode currentMode;
 
-    GLFWgammaramp   originalRamp;
-    GLFWgammaramp   currentRamp;
+    GLFWgammaramp originalRamp;
+    GLFWgammaramp currentRamp;
 
     // This is defined in the window API's platform.h
     _GLFW_PLATFORM_MONITOR_STATE;
@@ -482,7 +493,7 @@ struct _GLFWmonitor
 //
 struct _GLFWcursor
 {
-    _GLFWcursor*    next;
+    _GLFWcursor *next;
 
     // This is defined in the window API's platform.h
     _GLFW_PLATFORM_CURSOR_STATE;
@@ -492,18 +503,18 @@ struct _GLFWcursor
 //
 struct _GLFWmapelement
 {
-    uint8_t         type;
-    uint8_t         index;
-    int8_t          axisScale;
-    int8_t          axisOffset;
+    uint8_t type;
+    uint8_t index;
+    int8_t axisScale;
+    int8_t axisOffset;
 };
 
 // Gamepad mapping structure
 //
 struct _GLFWmapping
 {
-    char            name[128];
-    char            guid[33];
+    char name[128];
+    char guid[33];
     _GLFWmapelement buttons[15];
     _GLFWmapelement axes[6];
 };
@@ -512,17 +523,17 @@ struct _GLFWmapping
 //
 struct _GLFWjoystick
 {
-    GLFWbool        present;
-    float*          axes;
-    int             axisCount;
-    unsigned char*  buttons;
-    int             buttonCount;
-    unsigned char*  hats;
-    int             hatCount;
-    char            name[128];
-    void*           userPointer;
-    char            guid[33];
-    _GLFWmapping*   mapping;
+    GLFWbool present;
+    float *axes;
+    int axisCount;
+    unsigned char *buttons;
+    int buttonCount;
+    unsigned char *hats;
+    int hatCount;
+    char name[128];
+    void *userPointer;
+    char guid[33];
+    _GLFWmapping *mapping;
 
     // This is defined in the joystick API's joystick.h
     _GLFW_PLATFORM_JOYSTICK_STATE;
@@ -548,64 +559,68 @@ struct _GLFWmutex
 //
 struct _GLFWlibrary
 {
-    GLFWbool            initialized;
-    GLFWallocator       allocator;
+    GLFWbool initialized;
+    GLFWallocator allocator;
 
-    struct {
+    struct
+    {
         _GLFWinitconfig init;
-        _GLFWfbconfig   framebuffer;
-        _GLFWwndconfig  window;
-        _GLFWctxconfig  context;
-        int             refreshRate;
+        _GLFWfbconfig framebuffer;
+        _GLFWwndconfig window;
+        _GLFWctxconfig context;
+        int refreshRate;
     } hints;
 
-    _GLFWerror*         errorListHead;
-    _GLFWcursor*        cursorListHead;
-    _GLFWwindow*        windowListHead;
+    _GLFWerror *errorListHead;
+    _GLFWcursor *cursorListHead;
+    _GLFWwindow *windowListHead;
 
-    _GLFWmonitor**      monitors;
-    int                 monitorCount;
+    _GLFWmonitor **monitors;
+    int monitorCount;
 
-    GLFWbool            joysticksInitialized;
-    _GLFWjoystick       joysticks[GLFW_JOYSTICK_LAST + 1];
-    _GLFWmapping*       mappings;
-    int                 mappingCount;
+    GLFWbool joysticksInitialized;
+    _GLFWjoystick joysticks[GLFW_JOYSTICK_LAST + 1];
+    _GLFWmapping *mappings;
+    int mappingCount;
 
-    _GLFWtls            errorSlot;
-    _GLFWtls            contextSlot;
-    _GLFWtls            usercontextSlot;
-    _GLFWmutex          errorLock;
+    _GLFWtls errorSlot;
+    _GLFWtls contextSlot;
+    _GLFWtls usercontextSlot;
+    _GLFWmutex errorLock;
 
-    struct {
-        uint64_t        offset;
+    struct
+    {
+        uint64_t offset;
         // This is defined in the platform's time.h
         _GLFW_PLATFORM_LIBRARY_TIMER_STATE;
     } timer;
 
-    struct {
-        GLFWbool        available;
-        void*           handle;
-        char*           extensions[2];
+    struct
+    {
+        GLFWbool available;
+        void *handle;
+        char *extensions[2];
 #if !defined(_GLFW_VULKAN_STATIC)
         PFN_vkEnumerateInstanceExtensionProperties EnumerateInstanceExtensionProperties;
         PFN_vkGetInstanceProcAddr GetInstanceProcAddr;
 #endif
-        GLFWbool        KHR_surface;
+        GLFWbool KHR_surface;
 #if defined(_GLFW_WIN32)
-        GLFWbool        KHR_win32_surface;
+        GLFWbool KHR_win32_surface;
 #elif defined(_GLFW_COCOA)
-        GLFWbool        MVK_macos_surface;
-        GLFWbool        EXT_metal_surface;
+        GLFWbool MVK_macos_surface;
+        GLFWbool EXT_metal_surface;
 #elif defined(_GLFW_X11)
-        GLFWbool        KHR_xlib_surface;
-        GLFWbool        KHR_xcb_surface;
+        GLFWbool KHR_xlib_surface;
+        GLFWbool KHR_xcb_surface;
 #elif defined(_GLFW_WAYLAND)
-        GLFWbool        KHR_wayland_surface;
+        GLFWbool KHR_wayland_surface;
 #endif
     } vk;
 
-    struct {
-        GLFWmonitorfun  monitor;
+    struct
+    {
+        GLFWmonitorfun monitor;
         GLFWjoystickfun joystick;
     } callbacks;
 
@@ -625,206 +640,202 @@ struct _GLFWlibrary
 //
 extern _GLFWlibrary _glfw;
 
-
 //////////////////////////////////////////////////////////////////////////
 //////                       GLFW platform API                      //////
 //////////////////////////////////////////////////////////////////////////
 
 int _glfwPlatformInit(void);
 void _glfwPlatformTerminate(void);
-const char* _glfwPlatformGetVersionString(void);
+const char *_glfwPlatformGetVersionString(void);
 
-void _glfwPlatformGetCursorPos(_GLFWwindow* window, double* xpos, double* ypos);
-void _glfwPlatformSetCursorPos(_GLFWwindow* window, double xpos, double ypos);
-void _glfwPlatformSetCursorMode(_GLFWwindow* window, int mode);
+void _glfwPlatformGetCursorPos(_GLFWwindow *window, double *xpos, double *ypos);
+void _glfwPlatformSetCursorPos(_GLFWwindow *window, double xpos, double ypos);
+void _glfwPlatformSetCursorMode(_GLFWwindow *window, int mode);
 void _glfwPlatformSetRawMouseMotion(_GLFWwindow *window, GLFWbool enabled);
 GLFWbool _glfwPlatformRawMouseMotionSupported(void);
-int _glfwPlatformCreateCursor(_GLFWcursor* cursor,
-                              const GLFWimage* image, int xhot, int yhot);
-int _glfwPlatformCreateStandardCursor(_GLFWcursor* cursor, int shape);
-void _glfwPlatformDestroyCursor(_GLFWcursor* cursor);
-void _glfwPlatformSetCursor(_GLFWwindow* window, _GLFWcursor* cursor);
+int _glfwPlatformCreateCursor(_GLFWcursor *cursor,
+                              const GLFWimage *image, int xhot, int yhot);
+int _glfwPlatformCreateStandardCursor(_GLFWcursor *cursor, int shape);
+void _glfwPlatformDestroyCursor(_GLFWcursor *cursor);
+void _glfwPlatformSetCursor(_GLFWwindow *window, _GLFWcursor *cursor);
 
-const char* _glfwPlatformGetScancodeName(int scancode);
+const char *_glfwPlatformGetScancodeName(int scancode);
 int _glfwPlatformGetKeyScancode(int key);
 
-void _glfwPlatformFreeMonitor(_GLFWmonitor* monitor);
-void _glfwPlatformGetMonitorPos(_GLFWmonitor* monitor, int* xpos, int* ypos);
-void _glfwPlatformGetMonitorContentScale(_GLFWmonitor* monitor,
-                                         float* xscale, float* yscale);
-void _glfwPlatformGetMonitorWorkarea(_GLFWmonitor* monitor, int* xpos, int* ypos, int *width, int *height);
-GLFWvidmode* _glfwPlatformGetVideoModes(_GLFWmonitor* monitor, int* count);
-void _glfwPlatformGetVideoMode(_GLFWmonitor* monitor, GLFWvidmode* mode);
-GLFWbool _glfwPlatformGetGammaRamp(_GLFWmonitor* monitor, GLFWgammaramp* ramp);
-void _glfwPlatformSetGammaRamp(_GLFWmonitor* monitor, const GLFWgammaramp* ramp);
+void _glfwPlatformFreeMonitor(_GLFWmonitor *monitor);
+void _glfwPlatformGetMonitorPos(_GLFWmonitor *monitor, int *xpos, int *ypos);
+void _glfwPlatformGetMonitorContentScale(_GLFWmonitor *monitor,
+                                         float *xscale, float *yscale);
+void _glfwPlatformGetMonitorWorkarea(_GLFWmonitor *monitor, int *xpos, int *ypos, int *width, int *height);
+GLFWvidmode *_glfwPlatformGetVideoModes(_GLFWmonitor *monitor, int *count);
+void _glfwPlatformGetVideoMode(_GLFWmonitor *monitor, GLFWvidmode *mode);
+GLFWbool _glfwPlatformGetGammaRamp(_GLFWmonitor *monitor, GLFWgammaramp *ramp);
+void _glfwPlatformSetGammaRamp(_GLFWmonitor *monitor, const GLFWgammaramp *ramp);
 
-void _glfwPlatformSetClipboardString(const char* string);
-const char* _glfwPlatformGetClipboardString(void);
+void _glfwPlatformSetClipboardString(const char *string);
+const char *_glfwPlatformGetClipboardString(void);
 
 GLFWbool _glfwPlatformInitJoysticks(void);
 void _glfwPlatformTerminateJoysticks(void);
-int _glfwPlatformPollJoystick(_GLFWjoystick* js, int mode);
-void _glfwPlatformUpdateGamepadGUID(char* guid);
+int _glfwPlatformPollJoystick(_GLFWjoystick *js, int mode);
+void _glfwPlatformUpdateGamepadGUID(char *guid);
 
 uint64_t _glfwPlatformGetTimerValue(void);
 uint64_t _glfwPlatformGetTimerFrequency(void);
 
-int _glfwPlatformCreateWindow(_GLFWwindow* window,
-                              const _GLFWwndconfig* wndconfig,
-                              const _GLFWctxconfig* ctxconfig,
-                              const _GLFWfbconfig* fbconfig);
-void _glfwPlatformDestroyWindow(_GLFWwindow* window);
-void _glfwPlatformSetWindowTitle(_GLFWwindow* window, const char* title);
-void _glfwPlatformSetWindowIcon(_GLFWwindow* window,
-                                int count, const GLFWimage* images);
-void _glfwPlatformGetWindowPos(_GLFWwindow* window, int* xpos, int* ypos);
-void _glfwPlatformSetWindowPos(_GLFWwindow* window, int xpos, int ypos);
-void _glfwPlatformGetWindowSize(_GLFWwindow* window, int* width, int* height);
-void _glfwPlatformSetWindowSize(_GLFWwindow* window, int width, int height);
-void _glfwPlatformSetWindowSizeLimits(_GLFWwindow* window,
+int _glfwPlatformCreateWindow(_GLFWwindow *window,
+                              const _GLFWwndconfig *wndconfig,
+                              const _GLFWctxconfig *ctxconfig,
+                              const _GLFWfbconfig *fbconfig);
+void _glfwPlatformDestroyWindow(_GLFWwindow *window);
+void _glfwPlatformSetWindowTitle(_GLFWwindow *window, const char *title);
+void _glfwPlatformSetWindowIcon(_GLFWwindow *window,
+                                int count, const GLFWimage *images);
+void _glfwPlatformGetWindowPos(_GLFWwindow *window, int *xpos, int *ypos);
+void _glfwPlatformSetWindowPos(_GLFWwindow *window, int xpos, int ypos);
+void _glfwPlatformGetWindowSize(_GLFWwindow *window, int *width, int *height);
+void _glfwPlatformSetWindowSize(_GLFWwindow *window, int width, int height);
+void _glfwPlatformSetWindowSizeLimits(_GLFWwindow *window,
                                       int minwidth, int minheight,
                                       int maxwidth, int maxheight);
-void _glfwPlatformSetWindowAspectRatio(_GLFWwindow* window, int numer, int denom);
-void _glfwPlatformGetFramebufferSize(_GLFWwindow* window, int* width, int* height);
-void _glfwPlatformGetWindowFrameSize(_GLFWwindow* window,
-                                     int* left, int* top,
-                                     int* right, int* bottom);
-void _glfwPlatformGetWindowContentScale(_GLFWwindow* window,
-                                        float* xscale, float* yscale);
-void _glfwPlatformIconifyWindow(_GLFWwindow* window);
-void _glfwPlatformRestoreWindow(_GLFWwindow* window);
-void _glfwPlatformMaximizeWindow(_GLFWwindow* window);
-void _glfwPlatformShowWindow(_GLFWwindow* window);
-void _glfwPlatformHideWindow(_GLFWwindow* window);
-void _glfwPlatformRequestWindowAttention(_GLFWwindow* window);
-void _glfwPlatformFocusWindow(_GLFWwindow* window);
-void _glfwPlatformSetWindowMonitor(_GLFWwindow* window, _GLFWmonitor* monitor,
+void _glfwPlatformSetWindowAspectRatio(_GLFWwindow *window, int numer, int denom);
+void _glfwPlatformGetFramebufferSize(_GLFWwindow *window, int *width, int *height);
+void _glfwPlatformGetWindowFrameSize(_GLFWwindow *window,
+                                     int *left, int *top,
+                                     int *right, int *bottom);
+void _glfwPlatformGetWindowContentScale(_GLFWwindow *window,
+                                        float *xscale, float *yscale);
+void _glfwPlatformIconifyWindow(_GLFWwindow *window);
+void _glfwPlatformRestoreWindow(_GLFWwindow *window);
+void _glfwPlatformMaximizeWindow(_GLFWwindow *window);
+void _glfwPlatformShowWindow(_GLFWwindow *window);
+void _glfwPlatformHideWindow(_GLFWwindow *window);
+void _glfwPlatformRequestWindowAttention(_GLFWwindow *window);
+void _glfwPlatformFocusWindow(_GLFWwindow *window);
+void _glfwPlatformSetWindowMonitor(_GLFWwindow *window, _GLFWmonitor *monitor,
                                    int xpos, int ypos, int width, int height,
                                    int refreshRate);
-int _glfwPlatformWindowFocused(_GLFWwindow* window);
-int _glfwPlatformWindowIconified(_GLFWwindow* window);
-int _glfwPlatformWindowVisible(_GLFWwindow* window);
-int _glfwPlatformWindowMaximized(_GLFWwindow* window);
-int _glfwPlatformWindowHovered(_GLFWwindow* window);
-int _glfwPlatformFramebufferTransparent(_GLFWwindow* window);
-float _glfwPlatformGetWindowOpacity(_GLFWwindow* window);
-void _glfwPlatformSetWindowResizable(_GLFWwindow* window, GLFWbool enabled);
-void _glfwPlatformSetWindowDecorated(_GLFWwindow* window, GLFWbool enabled);
-void _glfwPlatformSetWindowFloating(_GLFWwindow* window, GLFWbool enabled);
-void _glfwPlatformSetWindowMousePassthrough(_GLFWwindow* window, GLFWbool enabled);
-void _glfwPlatformSetWindowOpacity(_GLFWwindow* window, float opacity);
+int _glfwPlatformWindowFocused(_GLFWwindow *window);
+int _glfwPlatformWindowIconified(_GLFWwindow *window);
+int _glfwPlatformWindowVisible(_GLFWwindow *window);
+int _glfwPlatformWindowMaximized(_GLFWwindow *window);
+int _glfwPlatformWindowHovered(_GLFWwindow *window);
+int _glfwPlatformFramebufferTransparent(_GLFWwindow *window);
+float _glfwPlatformGetWindowOpacity(_GLFWwindow *window);
+void _glfwPlatformSetWindowResizable(_GLFWwindow *window, GLFWbool enabled);
+void _glfwPlatformSetWindowDecorated(_GLFWwindow *window, GLFWbool enabled);
+void _glfwPlatformSetWindowFloating(_GLFWwindow *window, GLFWbool enabled);
+void _glfwPlatformSetWindowMousePassthrough(_GLFWwindow *window, GLFWbool enabled);
+void _glfwPlatformSetWindowOpacity(_GLFWwindow *window, float opacity);
 
 void _glfwPlatformPollEvents(void);
 void _glfwPlatformWaitEvents(void);
 void _glfwPlatformWaitEventsTimeout(double timeout);
 void _glfwPlatformPostEmptyEvent(void);
 
-_GLFWusercontext* _glfwPlatformCreateUserContext(_GLFWwindow* window);
+_GLFWusercontext *_glfwPlatformCreateUserContext(_GLFWwindow *window);
 
-EGLenum _glfwPlatformGetEGLPlatform(EGLint** attribs);
+EGLenum _glfwPlatformGetEGLPlatform(EGLint **attribs);
 EGLNativeDisplayType _glfwPlatformGetEGLNativeDisplay(void);
-EGLNativeWindowType _glfwPlatformGetEGLNativeWindow(_GLFWwindow* window);
+EGLNativeWindowType _glfwPlatformGetEGLNativeWindow(_GLFWwindow *window);
 
-void _glfwPlatformGetRequiredInstanceExtensions(char** extensions);
+void _glfwPlatformGetRequiredInstanceExtensions(char **extensions);
 int _glfwPlatformGetPhysicalDevicePresentationSupport(VkInstance instance,
                                                       VkPhysicalDevice device,
                                                       uint32_t queuefamily);
 VkResult _glfwPlatformCreateWindowSurface(VkInstance instance,
-                                          _GLFWwindow* window,
-                                          const VkAllocationCallbacks* allocator,
-                                          VkSurfaceKHR* surface);
+                                          _GLFWwindow *window,
+                                          const VkAllocationCallbacks *allocator,
+                                          VkSurfaceKHR *surface);
 
-GLFWbool _glfwPlatformCreateTls(_GLFWtls* tls);
-void _glfwPlatformDestroyTls(_GLFWtls* tls);
-void* _glfwPlatformGetTls(_GLFWtls* tls);
-void _glfwPlatformSetTls(_GLFWtls* tls, void* value);
+GLFWbool _glfwPlatformCreateTls(_GLFWtls *tls);
+void _glfwPlatformDestroyTls(_GLFWtls *tls);
+void *_glfwPlatformGetTls(_GLFWtls *tls);
+void _glfwPlatformSetTls(_GLFWtls *tls, void *value);
 
-GLFWbool _glfwPlatformCreateMutex(_GLFWmutex* mutex);
-void _glfwPlatformDestroyMutex(_GLFWmutex* mutex);
-void _glfwPlatformLockMutex(_GLFWmutex* mutex);
-void _glfwPlatformUnlockMutex(_GLFWmutex* mutex);
-
+GLFWbool _glfwPlatformCreateMutex(_GLFWmutex *mutex);
+void _glfwPlatformDestroyMutex(_GLFWmutex *mutex);
+void _glfwPlatformLockMutex(_GLFWmutex *mutex);
+void _glfwPlatformUnlockMutex(_GLFWmutex *mutex);
 
 //////////////////////////////////////////////////////////////////////////
 //////                         GLFW event API                       //////
 //////////////////////////////////////////////////////////////////////////
 
-void _glfwInputWindowFocus(_GLFWwindow* window, GLFWbool focused);
-void _glfwInputWindowPos(_GLFWwindow* window, int xpos, int ypos);
-void _glfwInputWindowSize(_GLFWwindow* window, int width, int height);
-void _glfwInputFramebufferSize(_GLFWwindow* window, int width, int height);
-void _glfwInputWindowContentScale(_GLFWwindow* window,
+void _glfwInputWindowFocus(_GLFWwindow *window, GLFWbool focused);
+void _glfwInputWindowPos(_GLFWwindow *window, int xpos, int ypos);
+void _glfwInputWindowSize(_GLFWwindow *window, int width, int height);
+void _glfwInputFramebufferSize(_GLFWwindow *window, int width, int height);
+void _glfwInputWindowContentScale(_GLFWwindow *window,
                                   float xscale, float yscale);
-void _glfwInputWindowIconify(_GLFWwindow* window, GLFWbool iconified);
-void _glfwInputWindowMaximize(_GLFWwindow* window, GLFWbool maximized);
-void _glfwInputWindowDamage(_GLFWwindow* window);
-void _glfwInputWindowCloseRequest(_GLFWwindow* window);
-void _glfwInputWindowMonitor(_GLFWwindow* window, _GLFWmonitor* monitor);
+void _glfwInputWindowIconify(_GLFWwindow *window, GLFWbool iconified);
+void _glfwInputWindowMaximize(_GLFWwindow *window, GLFWbool maximized);
+void _glfwInputWindowDamage(_GLFWwindow *window);
+void _glfwInputWindowCloseRequest(_GLFWwindow *window);
+void _glfwInputWindowMonitor(_GLFWwindow *window, _GLFWmonitor *monitor);
 
-void _glfwInputKey(_GLFWwindow* window,
+void _glfwInputKey(_GLFWwindow *window,
                    int key, int scancode, int action, int mods);
-void _glfwInputChar(_GLFWwindow* window,
+void _glfwInputChar(_GLFWwindow *window,
                     unsigned int codepoint, int mods, GLFWbool plain);
-void _glfwInputScroll(_GLFWwindow* window, double xoffset, double yoffset);
-void _glfwInputMouseClick(_GLFWwindow* window, int button, int action, int mods);
-void _glfwInputCursorPos(_GLFWwindow* window, double xpos, double ypos);
-void _glfwInputCursorEnter(_GLFWwindow* window, GLFWbool entered);
-void _glfwInputDrop(_GLFWwindow* window, int count, const char** names);
-void _glfwInputJoystick(_GLFWjoystick* js, int event);
-void _glfwInputJoystickAxis(_GLFWjoystick* js, int axis, float value);
-void _glfwInputJoystickButton(_GLFWjoystick* js, int button, char value);
-void _glfwInputJoystickHat(_GLFWjoystick* js, int hat, char value);
+void _glfwInputScroll(_GLFWwindow *window, double xoffset, double yoffset);
+void _glfwInputMouseClick(_GLFWwindow *window, int button, int action, int mods);
+void _glfwInputCursorPos(_GLFWwindow *window, double xpos, double ypos);
+void _glfwInputCursorEnter(_GLFWwindow *window, GLFWbool entered);
+void _glfwInputDrop(_GLFWwindow *window, int count, const char **names);
+void _glfwInputJoystick(_GLFWjoystick *js, int event);
+void _glfwInputJoystickAxis(_GLFWjoystick *js, int axis, float value);
+void _glfwInputJoystickButton(_GLFWjoystick *js, int button, char value);
+void _glfwInputJoystickHat(_GLFWjoystick *js, int hat, char value);
 
-void _glfwInputMonitor(_GLFWmonitor* monitor, int action, int placement);
-void _glfwInputMonitorWindow(_GLFWmonitor* monitor, _GLFWwindow* window);
+void _glfwInputMonitor(_GLFWmonitor *monitor, int action, int placement);
+void _glfwInputMonitorWindow(_GLFWmonitor *monitor, _GLFWwindow *window);
 
 #if defined(__GNUC__)
-void _glfwInputError(int code, const char* format, ...)
+void _glfwInputError(int code, const char *format, ...)
     __attribute__((format(printf, 2, 3)));
 #else
-void _glfwInputError(int code, const char* format, ...);
+void _glfwInputError(int code, const char *format, ...);
 #endif
-
 
 //////////////////////////////////////////////////////////////////////////
 //////                       GLFW internal API                      //////
 //////////////////////////////////////////////////////////////////////////
 
-GLFWbool _glfwStringInExtensionString(const char* string, const char* extensions);
-const _GLFWfbconfig* _glfwChooseFBConfig(const _GLFWfbconfig* desired,
-                                         const _GLFWfbconfig* alternatives,
+GLFWbool _glfwStringInExtensionString(const char *string, const char *extensions);
+const _GLFWfbconfig *_glfwChooseFBConfig(const _GLFWfbconfig *desired,
+                                         const _GLFWfbconfig *alternatives,
                                          unsigned int count);
-GLFWbool _glfwRefreshContextAttribs(_GLFWwindow* window,
-                                    const _GLFWctxconfig* ctxconfig);
-GLFWbool _glfwIsValidContextConfig(const _GLFWctxconfig* ctxconfig);
+GLFWbool _glfwRefreshContextAttribs(_GLFWwindow *window,
+                                    const _GLFWctxconfig *ctxconfig);
+GLFWbool _glfwIsValidContextConfig(const _GLFWctxconfig *ctxconfig);
 
-const GLFWvidmode* _glfwChooseVideoMode(_GLFWmonitor* monitor,
-                                        const GLFWvidmode* desired);
-int _glfwCompareVideoModes(const GLFWvidmode* first, const GLFWvidmode* second);
-_GLFWmonitor* _glfwAllocMonitor(const char* name, int widthMM, int heightMM);
-void _glfwFreeMonitor(_GLFWmonitor* monitor);
-void _glfwAllocGammaArrays(GLFWgammaramp* ramp, unsigned int size);
-void _glfwFreeGammaArrays(GLFWgammaramp* ramp);
-void _glfwSplitBPP(int bpp, int* red, int* green, int* blue);
+const GLFWvidmode *_glfwChooseVideoMode(_GLFWmonitor *monitor,
+                                        const GLFWvidmode *desired);
+int _glfwCompareVideoModes(const GLFWvidmode *first, const GLFWvidmode *second);
+_GLFWmonitor *_glfwAllocMonitor(const char *name, int widthMM, int heightMM);
+void _glfwFreeMonitor(_GLFWmonitor *monitor);
+void _glfwAllocGammaArrays(GLFWgammaramp *ramp, unsigned int size);
+void _glfwFreeGammaArrays(GLFWgammaramp *ramp);
+void _glfwSplitBPP(int bpp, int *red, int *green, int *blue);
 
 void _glfwInitGamepadMappings(void);
-_GLFWjoystick* _glfwAllocJoystick(const char* name,
-                                  const char* guid,
+_GLFWjoystick *_glfwAllocJoystick(const char *name,
+                                  const char *guid,
                                   int axisCount,
                                   int buttonCount,
                                   int hatCount);
-void _glfwFreeJoystick(_GLFWjoystick* js);
-void _glfwCenterCursorInContentArea(_GLFWwindow* window);
+void _glfwFreeJoystick(_GLFWjoystick *js);
+void _glfwCenterCursorInContentArea(_GLFWwindow *window);
 
 GLFWbool _glfwInitVulkan(int mode);
 void _glfwTerminateVulkan(void);
-const char* _glfwGetVulkanResultString(VkResult result);
+const char *_glfwGetVulkanResultString(VkResult result);
 
-char* _glfw_strdup(const char* source);
+char *_glfw_strdup(const char *source);
 float _glfw_fminf(float a, float b);
 float _glfw_fmaxf(float a, float b);
 
-void* _glfw_calloc(size_t count, size_t size);
-void* _glfw_realloc(void* pointer, size_t size);
-void _glfw_free(void* pointer);
-
+void *_glfw_calloc(size_t count, size_t size);
+void *_glfw_realloc(void *pointer, size_t size);
+void _glfw_free(void *pointer);
